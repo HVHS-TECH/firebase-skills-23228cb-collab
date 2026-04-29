@@ -35,7 +35,7 @@ function byeWorld() {
 }
 function simpleRead() {
   console.log("Reading message");
-  firebase.database().ref('/').child('message').once('value', display, fb_readError);
+  firebase.database().ref('/').child('age').once('value', display, fb_readError);
   console.log("Leaving simpleRead")
 
 }
@@ -54,6 +54,24 @@ function display(snapshot) {
 }
 function fb_readListener() {
   console.log("read listener");
-  firebase.database().ref('/message').on('value',fb_logDatabaseRead)
+  firebase.database().ref('/message').on('value', displayRead)
+}
+function complexWrite() {
+  firebase.database().ref('/').set(
+    {
+      users: {
+        cameron_johns: {
+          age: 10,
+          height: 193,
+
+        },
+        bernie_sanders: {
+          age:"old",
+          height:1776,
+
+        }
+      }
+    }
+  )
 }
 
