@@ -60,18 +60,31 @@ function complexWrite() {
   firebase.database().ref('/').set(
     {
       users: {
-        cameron_johns: {
-          age: 10,
-          height: 193,
-
+        age:{
+          bernie_sanders:1776,
+          cameron: 1964,
+          JFK:1973,
         },
-        bernie_sanders: {
-          age:"old",
-          height:1776,
-
-        }
+        height:{
+          bernie_sanders:670,
+          cameron:654,
+          JFK:737,
+        },
       }
     }
   )
 }
-
+let age = 1973
+let usr1 = "bernie_sanders"
+function changeAge(){
+  firebase.database().ref('/users/age/'+usr1).set(
+    age,
+  )
+}
+function fb_readAge(){
+  console.log('reading age');
+ firebase.database().ref('/users/age/').once('value', displayRead, fb_error)
+}
+function fb_error(){
+  console.log(errorMessage)
+}
