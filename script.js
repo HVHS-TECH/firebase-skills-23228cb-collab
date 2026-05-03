@@ -40,7 +40,8 @@ function simpleRead() {
 
 }
 function displayRead(snapshot) {
-  console.log("Running displayRead(), the message is: " + snapshot.val())
+  //console.log("Running displayRead(), the message is: " + snapshot.val())
+  console.log(snapshot.val())
   HTML_OUTPUT.innerHTML = snapshot.val();
 }
 function display(snapshot) {
@@ -83,8 +84,11 @@ function changeAge(){
 }
 function fb_readAge(){
   console.log('reading age');
- firebase.database().ref('/users/age/').once('value', displayRead, fb_error)
+ firebase.database().ref('/users/age/').once('value', fb_displayAge, fb_error)
 }
 function fb_error(){
   console.log(errorMessage)
+}
+function fb_displayAge(snapshot){
+  console.log("bernie sanders got "+snapshot.val()["bernie_sanders"]+"age")
 }
