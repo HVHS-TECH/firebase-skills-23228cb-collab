@@ -75,11 +75,11 @@ function complexWrite() {
     }
   )
 }
-let age = 1973
+let Age = 1973
 let usr1 = "bernie_sanders"
 function changeAge(){
   firebase.database().ref('/users/age/'+usr1).set(
-    age,
+    Age,
   )
 }
 function fb_readAge(){
@@ -89,6 +89,16 @@ function fb_readAge(){
 function fb_error(){
   console.log(errorMessage)
 }
+
+
+
 function fb_displayAge(snapshot){
-  console.log("bernie sanders got "+snapshot.val()["bernie_sanders"]+"age")
+  let age= snapshot.val()
+  let name = Object.keys(age);
+  console.log(name);
+ // console.log("bernie sanders got "+snapshot.val()["bernie_sanders"]+" age")
+  for(i= 0; i< name.length; i++){
+  let key= name[i];
+  console.log("age " + i + " is for" + key +". "+age[key]+" Years." )
+}
 }
