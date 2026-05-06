@@ -61,15 +61,15 @@ function complexWrite() {
   firebase.database().ref('/').set(
     {
       users: {
-        age:{
-          bernie_sanders:1776,
+        age: {
+          bernie_sanders: 1776,
           cameron: 1964,
-          JFK:1973,
+          JFK: 1973,
         },
-        height:{
-          bernie_sanders:670,
-          cameron:654,
-          JFK:737,
+        height: {
+          bernie_sanders: 670,
+          cameron: 654,
+          JFK: 737,
         },
       }
     }
@@ -77,28 +77,30 @@ function complexWrite() {
 }
 let Age = 1973
 let usr1 = "bernie_sanders"
-function changeAge(){
-  firebase.database().ref('/users/age/'+usr1).set(
+function changeAge() {
+  firebase.database().ref('/users/age/' + usr1).set(
     Age,
   )
 }
-function fb_readAge(){
+function fb_readAge() {
   console.log('reading age');
- firebase.database().ref('/users/age/').once('value', fb_displayAge, fb_error)
+  firebase.database().ref('/users/age/').orderByValue().once('value', fb_displayAge, fb_error)
 }
-function fb_error(){
+function fb_error() {
   console.log(errorMessage)
 }
-
-
-
-function fb_displayAge(snapshot){
-  let age= snapshot.val()
-  let name = Object.keys(age);
-  console.log(name);
- // console.log("bernie sanders got "+snapshot.val()["bernie_sanders"]+" age")
-  for(i= 0; i< name.length; i++){
-  let key= name[i];
-  console.log("age " + i + " is for" + key +". "+age[key]+" Years." )
+function showOneHeight(child) {
+  console.log(child.key+" is "+child.val()+" years")
 }
+
+function fb_displayAge(snapshot) {
+  snapshot.forEach(showOneHeight);
+  //let age = snapshot.val()
+  //let name = Object.keys(age);
+ // console.log(name);
+  // console.log("bernie sanders got "+snapshot.val()["bernie_sanders"]+" age")
+  //for (i = 0; i < name.length; i++) {
+ //   let key = name[i];
+ //   console.log("age " + i + " is for" + key + ". " + age[key] + " Years.")
+  
 }
